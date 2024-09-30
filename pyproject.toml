@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "metadata-gathering"
+version = "0.1.0"
+description = "A Python API that returns metadata for text files in JSON format, allows CSV download, and is containerized in Docker with automated file download, along with comprehensive testing and usage instructions."
+authors = ["Martin Klosi <roise3000@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+pytest = "*"
+python = "~3.10"
+pytz = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.DS_Store
+.idea/
+/*.iml
+__pycache__
+sample-files-main/
+sample-files-main.zip
