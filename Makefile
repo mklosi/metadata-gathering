@@ -8,17 +8,34 @@ CONTAINER_NAME=$(BASE_NAME)-container
 # Define the poetry export and build commands
 .PHONY: build run requirements
 
-# Export requirements.txt using poetry
-requirements:
+# Install python dependencies from an already generated lock file.
+env_build:
+	poetry install --sync
+
+# Generate a new lock file (resolve dependencies) and install them.
+env_update:
+	poetry lock
+	$(MAKE) env_build
+
+# Create a new poetry env.
+env_create:
+	poetry env use python3
+	$(MAKE) env_update
+
+# Export requirements.txt for the server docker image using poetry.
+docker_reqs:
 	poetry install --sync
 	poetry export --without-hashes --format=requirements.txt > server/requirements.txt
 
 # Build the Docker image
-build: requirements
+docker_build: docker_reqs
 	docker build -t $(FULL_IMAGE_NAME) .
 
-# Run the Docker container
-run:
+# Run a Docker container
+docker_run:
 	@docker stop $(CONTAINER_NAME) > /dev/null || true
 	@docker rm $(CONTAINER_NAME) > /dev/null || true
 	docker run --name $(CONTAINER_NAME) -p 4000:4000 $(FULL_IMAGE_NAME)
+
+test: env_build
+	pytest -s tests/
