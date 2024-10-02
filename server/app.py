@@ -1,13 +1,16 @@
+"""
+This is the server Flask app that is to run inside a Docker container. It accepts requests on port 4000.
+"""
+
 import csv
-import io
 import hashlib
+import io
 import json
 import os
+import zipfile
 from datetime import datetime
 
 import requests
-import zipfile
-
 from flask import Flask, send_file
 
 app = Flask(__name__)

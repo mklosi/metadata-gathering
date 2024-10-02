@@ -1,7 +1,7 @@
 # Use the official Python image from the Docker hub
 FROM python:3.10-slim
 
-# Copy the current directory contents into the container at /app
+# Copy the server/ directory contents into the container at /app. This will include app.py and requirements.txt
 COPY server/ /app
 
 # Set the working directory in the container to /app

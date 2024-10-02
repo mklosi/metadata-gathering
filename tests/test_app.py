@@ -123,7 +123,7 @@ class TestGenerateMetadata:
         assert observed == expected
 
     def test_case_1(self, mocker):
-        # Test a single file
+        # Test the golden path.
         content_dict = {
             "sample_file_0.txt": "word11 word12     word13	word14 word14",
             "sample_file_1.txt": "This is the content of file_1"
@@ -166,7 +166,7 @@ class TestGenerateMetadata:
         self.run_test(content_dict, mocker, expected)
 
     def test_case_3(self, mocker):
-        # Test case where there is 1 file, with multiline content.
+        # Test case where there is 1 file, with multi-line content.
         content_dict = {
             "some_other_file.txt": """
 word11 word12     word13	word14

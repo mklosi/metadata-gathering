@@ -6,7 +6,7 @@ FULL_IMAGE_NAME=$(IMAGE_NAME):$(IMAGE_TAG)
 CONTAINER_NAME=$(BASE_NAME)-container
 
 # Define the poetry export and build commands
-.PHONY: build run requirements
+.PHONY: env_build env_update env_create docker_reqs docker_build docker_run test
 
 # Install python dependencies from an already generated lock file.
 env_build:

@@ -1,3 +1,7 @@
+"""
+This is a simple python script that simply makes HTTP requests to the server, which runs inside a docker container.
+"""
+
 import os
 
 import requests
@@ -16,7 +20,7 @@ if __name__ == '__main__':
         f.write(response.text)
     print(f"CSV file written to: {CSV_FILE_PATH}")
 
-    # Hit 'get_metadata_json' API route. The call here is disabled (commented out), since it's not part of the reqs.
+    # Hit 'get_metadata_json' API route.
     response = requests.get(f'{BASE_URL}/get-metadata-json')
     response.raise_for_status()
     print(f"text: {response.text}")
