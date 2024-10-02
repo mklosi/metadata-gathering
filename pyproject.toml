@@ -10,6 +10,7 @@ package-mode = false
 flask = "*"
 requests = "*"
 pytest = "*"
+pytest-mock = "*"
 python = "~3.10"
 pytz = "*"
 

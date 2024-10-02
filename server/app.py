@@ -13,10 +13,9 @@ from flask import Flask, send_file
 app = Flask(__name__)
 
 ZIP_URL = "https://github.com/BrainMonkey/sample-files/archive/refs/heads/main.zip"
-BASE_DIR = os.path.dirname(os.getcwd())
+BASE_DIR = os.getcwd()
 ZIP_FILE_PATH = os.path.join(BASE_DIR, 'sample-files-main.zip')
 TEXT_FILES_DIR = os.path.join(BASE_DIR, 'sample-files-main')
-CSV_FILE_PATH = os.path.join(BASE_DIR, 'interview.csv')
 
 
 def download_and_extract_zip():
@@ -30,7 +29,7 @@ def download_and_extract_zip():
 
     # Extract the txt files from zip.
     with zipfile.ZipFile(ZIP_FILE_PATH, 'r') as zip_ref:
-        zip_ref.extractall(BASE_DIR)
+        zip_ref.extractall(TEXT_FILES_DIR)
         print("Extracted zip file.")
 
     # Clean up zip file.
@@ -49,7 +48,7 @@ def calculate_sha256(file_path):
 def generate_metadata():
     download_and_extract_zip()
     metadata = []
-    for file_name in os.listdir(TEXT_FILES_DIR):
+    for file_name in sorted(os.listdir(TEXT_FILES_DIR)):
         file_path = os.path.join(TEXT_FILES_DIR, file_name)
         if os.path.isfile(file_path) and file_path.endswith(".txt"):
             words = open(file_path).read().split()
@@ -59,7 +58,7 @@ def generate_metadata():
                 "file_size": os.path.getsize(file_path),
                 "word_count": len(words),
                 "unique_word_count": len(set(words)),
-                "date": datetime.now().strftime('%Y-%m-%d')
+                "date": datetime.now().strftime('%Y-%m-%d'),
             }
             metadata.append(md_)
     return metadata
