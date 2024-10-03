@@ -5,17 +5,18 @@ IMAGE_TAG=0.0.1
 FULL_IMAGE_NAME=$(IMAGE_NAME):$(IMAGE_TAG)
 CONTAINER_NAME=$(BASE_NAME)-container
 
-# Define the poetry export and build commands
-.PHONY: env_build env_update env_create docker_reqs docker_build docker_run test
+# Define the poetry export and build commands. The .PHONY target ensures
+#   that the 'make' tool is not treating the other targets as files.
+.PHONY: env_install env_update env_create docker_reqs docker_build docker_run test
 
 # Install python dependencies from an already generated lock file.
-env_build:
+env_install:
 	poetry install --sync
 
 # Generate a new lock file (resolve dependencies) and install them.
 env_update:
 	poetry lock
-	$(MAKE) env_build
+	$(MAKE) env_install
 
 # Create a new poetry env.
 env_create:
@@ -37,5 +38,8 @@ docker_run:
 	@docker rm $(CONTAINER_NAME) > /dev/null || true
 	docker run --name $(CONTAINER_NAME) -p 4000:4000 $(FULL_IMAGE_NAME)
 
-test: env_build
+test: env_install
 	pytest -s tests/
+
+client_run:
+	python client/client.py
