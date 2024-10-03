@@ -32,7 +32,7 @@ def download_and_extract_zip():
 
     # Extract the txt files from zip.
     with zipfile.ZipFile(ZIP_FILE_PATH, 'r') as zip_ref:
-        zip_ref.extractall(TEXT_FILES_DIR)
+        zip_ref.extractall(BASE_DIR)
         print("Extracted zip file.")
 
     # Clean up zip file.
