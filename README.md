@@ -16,9 +16,9 @@ A Python API that returns metadata for text files in JSON format, allows CSV dow
 
 ## Quick Setup
 
-1. clone this repo with `git clone &&&`    # &&& also test here.
-2. run `cd metadata-gathering`
-3. run `make env_create`
+1. clone this repo with `git clone https://github.com/mklosi/metadata-gathering.git`
+2. run `cd metadata-gathering` - this should automatically set up the python poetry env for you, thanks to "direnv".
+3. just to make sure, run `which python`. you should see smth like: `~/Library/Caches/pypoetry/virtualenvs/metadata-gathering-Nrh2CMj2-py3.10/bin/python`.
 4. run `make docker_build`
 5. run `make docker_run`
 6. in another terminal, cd into project root again with `cd metadata-gathering`
